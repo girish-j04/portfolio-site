@@ -113,10 +113,284 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
+
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.7);
+            z-index: 60;
+            display: none;
+            backdrop-filter: blur(4px);
+        }
+        .modal {
+            max-height: 90vh;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #667eea #1a2332;
+        }
+
+        /* Carousel Styles */
+        .carousel-container {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.3s ease;
+            width: 100%;
+        }
+
+        .carousel img {
+            min-width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: background-color 0.3s ease;
+        }
+
+        .carousel-nav:hover {
+            background: rgba(0,0,0,0.9);
+        }
+
+        .carousel-nav.prev {
+            left: 10px;
+        }
+
+        .carousel-nav.next {
+            right: 10px;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 1rem;
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: #667eea;
+        }
+
+        /* PDF Preview Styles */
+        .pdf-preview-container {
+            border: 2px solid #2a3441;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            background: #0a0f1c;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pdf-preview-container:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .pdf-preview-header {
+            background: #1a2332;
+            padding: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pdf-icon {
+            width: 20px;
+            height: 20px;
+            color: #ef4444;
+        }
+
+        .pdf-document-preview {
+            height: 200px;
+            background: white;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            overflow: hidden;
+        }
+
+        .pdf-document-mock {
+            width: 80%;
+            height: 85%;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .pdf-document-mock::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #ef4444;
+        }
+
+        .pdf-title {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .pdf-content-lines {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .pdf-line {
+            height: 2px;
+            background: #ddd;
+            border-radius: 1px;
+        }
+
+        .pdf-line.title {
+            height: 3px;
+            background: #333;
+            width: 60%;
+            margin-bottom: 0.5rem;
+        }
+
+        .pdf-line.subtitle {
+            height: 2px;
+            background: #666;
+            width: 40%;
+            margin-bottom: 0.3rem;
+        }
+
+        .pdf-line.long {
+            width: 95%;
+        }
+
+        .pdf-line.medium {
+            width: 80%;
+        }
+
+        .pdf-line.short {
+            width: 60%;
+        }
+
+        .pdf-preview-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .pdf-preview-container:hover .pdf-preview-overlay {
+            opacity: 1;
+        }
+
+        .stacked-papers {
+            position: relative;
+            width: 100%;
+            height: 160px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        .stacked-papers .sheet {
+          position: absolute;
+          width: 90%;
+          height: 90%;
+          background: #fff;
+          border-radius: 4px;
+          box-shadow: 0 4px 15px rgba(0,0,0,.25);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 10px;
+          color: #000;
+          font-family: 'Space Grotesk', sans-serif;
+        }
+        .stacked-papers .sheet::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 4px;
+          height: 100%;
+          background: #ef4444;
+          border-radius: 4px 0 0 4px;
+        }
+        .stacked-papers .sheet::after {
+          content: 'wildfire-report.pdf';
+          font-weight: 700;
+          letter-spacing: .5px;
+        }
+        .stacked-papers .sheet:nth-child(1) {
+            top: 0;
+            left: 0;
+            z-index: 3;
+        }
+        .stacked-papers .sheet:nth-child(2) {
+            top: 6px;
+            left: 6px;
+            z-index: 2;
+            opacity: .85;
+        }
+        .stacked-papers .sheet:nth-child(3) {
+            top: 12px;
+            left: 12px;
+            z-index: 1;
+            opacity: .7;
+        }
+        .stacked-papers:hover .sheet {
+            transform: translateY(-4px) rotateX(5deg);
+        }
+        .project-card img {
+            transition: transform .4s ease;
+        }
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body class="bg-[#0a0f1c] text-white" style='font-family: "Space Grotesk", "Noto Sans", sans-serif;'>
-    <!-- Navigation -->
+
     <nav class="fixed top-0 w-full bg-[#0a0f1c]/90 backdrop-blur-md z-50 border-b border-[#1a2332]">
         <div class="max-w-7xl mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
@@ -153,7 +427,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="min-h-screen flex items-center justify-center relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-br from-purple-900/20 to-blue-900/20"></div>
         <div class="max-w-7xl mx-auto px-6 py-20 relative z-10">
@@ -183,7 +456,6 @@
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="py-20 bg-[#111827]">
         <div class="max-w-7xl mx-auto px-6">
             <div class="section-reveal">
@@ -209,7 +481,7 @@
                     </div>
                     <div class="relative">
                         <div class="w-80 h-80 mx-auto bg-gradient-to-br from-purple-500 to-blue-600 rounded-full flex items-center justify-center text-6xl font-bold">
-                            <img src="Girish_photo.jpg" class="rounded-full flex items-center justify-center"/>
+                            <img src="Girish_photo.jpg" class="rounded-full flex items-center justify-center">
                         </div>
                     </div>
                 </div>
@@ -217,13 +489,11 @@
         </div>
     </section>
 
-    <!-- Experience Section -->
     <section id="experience" class="py-20">
         <div class="max-w-7xl mx-auto px-6">
             <div class="section-reveal">
                 <h2 class="text-4xl font-bold text-center mb-16">Experience</h2>
                 <div class="space-y-8">
-                    <!-- Current Role -->
                     <div class="experience-card bg-[#1a2332] rounded-xl p-8 border border-[#2a3441]">
                         <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
                             <div>
@@ -242,7 +512,6 @@
                         </ul>
                     </div>
 
-                    <!-- Wells Fargo -->
                     <div class="experience-card bg-[#1a2332] rounded-xl p-8 border border-[#2a3441]">
                         <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
                             <div>
@@ -261,7 +530,6 @@
                         </ul>
                     </div>
 
-                    <!-- Internship -->
                     <div class="experience-card bg-[#1a2332] rounded-xl p-8 border border-[#2a3441]">
                         <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
                             <div>
@@ -284,92 +552,120 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
     <section id="projects" class="py-20 bg-[#111827]">
         <div class="max-w-7xl mx-auto px-6">
             <div class="section-reveal">
                 <h2 class="text-4xl font-bold text-center mb-16">Featured Projects</h2>
                 <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
-                    <!-- GradCompass -->
-                    <div class="project-card bg-[#1a2332] rounded-xl overflow-hidden border border-[#2a3441]">
-                        <div class="h-48 bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center">
-                            <h3 class="text-2xl font-bold text-white">GradCompass</h3>
-                        </div>
+
+                    <div class="project-card bg-[#1a2332] rounded-xl overflow-hidden border border-[#2a3441] cursor-pointer"
+                         onclick="openModal('modal-gradcompass')">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=60"
+                             alt="GradCompass" class="w-full h-48 object-cover">
                         <div class="p-6">
-                            <h3 class="text-xl font-bold mb-3">AI-Powered Graduate Application Assistant</h3>
-                            <p class="text-gray-300 mb-4">
-                                Comprehensive full-stack platform with 6 specialized AI agents, PostgreSQL database, and AI-powered visa interview simulator with real-time speech processing.
+                            <h3 class="text-xl font-bold mb-2">AI-Powered Graduate Application Assistant</h3>
+                            <p class="text-sm text-gray-300 mb-4">
+                                Comprehensive full-stack platform with 6 specialized AI agents, PostgreSQL database, and AI-powered visa interview simulator.
                             </p>
-                            <div class="flex flex-wrap gap-2 mb-4">
+                            <div class="flex flex-wrap gap-2">
                                 <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">React</span>
                                 <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">FastAPI</span>
                                 <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">PostgreSQL</span>
-                                <span class="px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-sm">Gemini API</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Wildfire Prediction -->
-                    <div class="project-card bg-[#1a2332] rounded-xl overflow-hidden border border-[#2a3441]">
-                        <div class="h-48 bg-gradient-to-br from-red-500 to-orange-600 flex items-center justify-center">
-                            <h3 class="text-2xl font-bold text-white">WildfireAI</h3>
-                        </div>
+
+                    <div class="project-card bg-[#1a2332] rounded-xl overflow-hidden border border-[#2a3441] cursor-pointer"
+                         onclick="openModal('modal-cine')">
+                        <img src="https://images.unsplash.com/photo-1473596477327-988dba107d1e?auto=format&fit=crop&w=800&q=60"
+                             alt="GradCompass" class="w-full h-48 object-cover">
                         <div class="p-6">
-                            <h3 class="text-xl font-bold mb-3">Wildfire Risk Prediction System</h3>
-                            <p class="text-gray-300 mb-4">
-                                AI-driven platform achieving 82% accuracy for wildfire risk assessment, integrating real-time NASA FIRMS data with LSTM networks and XGBoost models.
+                            <h3 class="text-xl font-bold mb-2">Cine-Stellation</h3>
+                            <p class="text-sm text-gray-300 mb-4">
+                                A sophisticated movie recommendation system that visualizes movie relationships as interactive constellation graphs using machine learning algorithms.
                             </p>
-                            <div class="flex flex-wrap gap-2 mb-4">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">NextJS</span>
+                                <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">FastAPI</span>
+                                <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">TF-IDF</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card bg-[#1a2332] rounded-xl overflow-hidden border border-[#2a3441] cursor-pointer"
+                         onclick="openModal('modal-talktoyourrepo')">
+                        <img src="https://images.unsplash.com/photo-1556075798-4825dfaaf498?auto=format&fit=crop&w=800&q=60"
+                             alt="TalkToYourRepo" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Talk to Your Repo</h3>
+                            <p class="text-sm text-gray-300 mb-4">
+                                Turn your repository into an AI agent. Chunk code, query it via chat, generate tests, and push intelligent updates.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">React</span>
+                                <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">FastAPI</span>
+                                <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">ChromaDB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card bg-[#1a2332] rounded-xl overflow-hidden border border-[#2a3441] cursor-pointer"
+                         onclick="openModal('modal-wildfire')">
+                        <img src="https://images.unsplash.com/photo-1551207004-3e38b4f52ba6?auto=format&fit=crop&w=800&q=60"
+                             alt="Wildfire Risk" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Wildfire Risk Prediction System</h3>
+                            <p class="text-sm text-gray-300 mb-4">
+                                ML-driven platform achieving 82% accuracy for wildfire risk assessment with NASA FIRMS integration.
+                            </p>
+                            <div class="flex flex-wrap gap-2">
                                 <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">Python</span>
                                 <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">LSTM</span>
                                 <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">XGBoost</span>
-                                <span class="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm">NASA-FIRMS</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- VQA System -->
-                    <div class="project-card bg-[#1a2332] rounded-xl overflow-hidden border border-[#2a3441]">
-                        <div class="h-48 bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center">
-                            <h3 class="text-2xl font-bold text-white">VQA Network</h3>
-                        </div>
+                    <div class="project-card bg-[#1a2332] rounded-xl overflow-hidden border border-[#2a3441] cursor-pointer"
+                         onclick="openModal('modal-vqa')">
+                        <img src="https://images.unsplash.com/photo-1527474305487-b87b222841cc?auto=format&fit=crop&w=800&q=60"
+                             alt="VQA Network" class="w-full h-48 object-cover">
                         <div class="p-6">
-                            <h3 class="text-xl font-bold mb-3">Visual Question Answering System</h3>
-                            <p class="text-gray-300 mb-4">
-                                Image-based question-answering model combining LSTM and VGG19 with multi-layer feature fusion and stacked attention mechanisms.
+                            <h3 class="text-xl font-bold mb-2">Visual Question Answering System</h3>
+                            <p class="text-sm text-gray-300 mb-4">
+                                Image-based Q&A model combining LSTM and VGG19 with multi-layer feature fusion and stacked attention.
                             </p>
-                            <div class="flex flex-wrap gap-2 mb-4">
+                            <div class="flex flex-wrap gap-2">
                                 <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">Python</span>
                                 <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">LSTM</span>
                                 <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">CNN</span>
-                                <span class="px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-sm">VGG19</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- M-Commerce -->
-                    <div class="project-card bg-[#1a2332] rounded-xl overflow-hidden border border-[#2a3441]">
-                        <div class="h-48 bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-                            <h3 class="text-2xl font-bold text-white">M-Commerce</h3>
-                        </div>
+                    <div class="project-card bg-[#1a2332] rounded-xl overflow-hidden border border-[#2a3441] cursor-pointer"
+                         onclick="openModal('modal-mcommerce')">
+                        <img src="https://images.unsplash.com/photo-1659353669929-1276a93a2d04?auto=format&fit=crop&w=800&q=60"
+                             alt="M-Commerce" class="w-full h-48 object-cover">
                         <div class="p-6">
-                            <h3 class="text-xl font-bold mb-3">Offline Payment Solution</h3>
-                            <p class="text-gray-300 mb-4">
+                            <h3 class="text-xl font-bold mb-2">Offline Payment Solution</h3>
+                            <p class="text-sm text-gray-300 mb-4">
                                 Wallet-based mobile application designed for seamless online and offline transactions, reducing payment failures in low connectivity areas. Published in SN Computer Science 2022.
                             </p>
-                            <div class="flex flex-wrap gap-2 mb-4">
+                            <div class="flex flex-wrap gap-2">
                                 <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">React Native</span>
                                 <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">NodeJS</span>
                                 <span class="px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-sm">MongoDB</span>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
     <section id="skills" class="py-20">
         <div class="max-w-7xl mx-auto px-6">
             <div class="section-reveal">
@@ -424,7 +720,6 @@
         </div>
     </section>
 
-    <!-- Education Section -->
     <section id="education" class="py-20 bg-[#111827]">
         <div class="max-w-7xl mx-auto px-6">
             <div class="section-reveal">
@@ -468,7 +763,6 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="py-20">
         <div class="max-w-7xl mx-auto px-6">
             <div class="section-reveal">
@@ -535,7 +829,7 @@
                             </div>
                         </div>
                         <div class="bg-[#1a2332] rounded-xl p-8 border border-[#2a3441]">
-                            <form class="space-y-6">
+                            <form class="space-y-6" onsubmit="event.preventDefault(); alert('Thank you for your message! I\'ll get back to you soon.'); this.reset();">
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Name</label>
                                     <input type="text" class="w-full px-4 py-3 bg-[#0a0f1c] border border-[#2a3441] rounded-lg focus:outline-none focus:border-purple-500 transition-colors">
@@ -559,7 +853,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="py-8 border-t border-[#1a2332]">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row items-center justify-between">
@@ -593,8 +886,262 @@
         </div>
     </footer>
 
+    <!-- Updated Modals with Carousel and PDF Embedding -->
+    
+    <!-- GradCompass Modal with Carousel -->
+    <div id="modal-gradcompass" class="modal-backdrop">
+        <div class="modal relative bg-[#1a2332] rounded-xl max-w-4xl mx-auto mt-20 p-6 md:p-8 border border-[#2a3441]">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl z-20">&times;</button>
+            <h2 class="text-2xl font-bold mb-4 gradient-text">GradCompass — AI-Powered Graduate Assistant</h2>
+            
+            <div class="carousel-container">
+                <div class="carousel-wrapper overflow-hidden rounded-lg">
+                    <div class="carousel" id="carousel-gradcompass">
+                        <img src="gc_hero.jpg" alt="GradCompass Hero">
+                        <img src="gc_signup.jpg" alt="GradCompass Signup">
+                        <img src="gc_dashboard.jpg" alt="GradCompass Dashboard">
+                        <img src="gc_agents.jpg" alt="GradCompass Agents">
+                        <img src="gc_interview.jpg" alt="GradCompass F1 Mock">
+                    </div>
+                </div>
+                <button class="carousel-nav prev" onclick="prevSlide('gradcompass')">❮</button>
+                <button class="carousel-nav next" onclick="nextSlide('gradcompass')">❯</button>
+                <div class="carousel-dots">
+                    <span class="carousel-dot active" onclick="goToSlide('gradcompass', 0)"></span>
+                    <span class="carousel-dot" onclick="goToSlide('gradcompass', 1)"></span>
+                    <span class="carousel-dot" onclick="goToSlide('gradcompass', 2)"></span>
+                    <span class="carousel-dot" onclick="goToSlide('gradcompass', 3)"></span>
+                    <span class="carousel-dot" onclick="goToSlide('gradcompass', 4)"></span>
+                </div>
+            </div>
+            
+            <p class="text-gray-300 mb-4">
+                GradCompass is an AI-powered graduate application assistant built with React 19, FastAPI, and Google Gemini AI that guides students through their entire grad school journey via 5 specialized AI agents. The platform features real-time WebSocket-powered mock visa interviews, intelligent university matching, and document assistance - all backed by async PostgreSQL operations and LangGraph workflow orchestration. Think of it as having a personal admissions counselor who never sleeps, powered by modern full-stack architecture that makes the overwhelming world of graduate applications actually manageable. Built with the kind of tech stack that makes both users and developers happy.
+            </p>
+            <div class="flex gap-4">
+                <a href="https://github.com/girish-j04" target="_blank" class="px-4 py-2 bg-purple-600 rounded-lg hover:bg-purple-700 transition">GitHub</a>
+                <a href="https://github.com/girish-j04" target="_blank" class="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 transition">Live Demo</a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- CineStellation Modal with Carousel -->
+    <div id="modal-cine" class="modal-backdrop">
+        <div class="modal relative bg-[#1a2332] rounded-xl max-w-4xl mx-auto mt-20 p-6 md:p-8 border border-[#2a3441]">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl z-20">&times;</button>
+            <h2 class="text-2xl font-bold mb-4 gradient-text">Cine-Stellation - Movie Recommender</h2>
+            
+            <div class="carousel-container">
+                <div class="carousel-wrapper overflow-hidden rounded-lg">
+                    <div class="carousel" id="carousel-cine">
+                        <img src="cine_hero.jpg" alt="Cine Hero">
+                        <img src="cine_login.jpg" alt="Cine Signup">
+                        <img src="cine_dashboard.jpg" alt="Cine Dashboard">
+                        <img src="cine_my.jpg" alt="Cine Mine">
+                    </div>
+                </div>
+                <button class="carousel-nav prev" onclick="prevSlide('cine')">❮</button>
+                <button class="carousel-nav next" onclick="nextSlide('cine')">❯</button>
+                <div class="carousel-dots">
+                    <span class="carousel-dot active" onclick="goToSlide('cine', 0)"></span>
+                    <span class="carousel-dot" onclick="goToSlide('cine', 1)"></span>
+                    <span class="carousel-dot" onclick="goToSlide('cine', 2)"></span>
+                    <span class="carousel-dot" onclick="goToSlide('cine', 3)"></span>
+                </div>
+            </div>
+            
+            <p class="text-gray-300 mb-4">
+                Cine-Stellation is an interactive movie recommendation system that visualizes movie relationships as constellation graphs using machine learning algorithms. Built with Next.js frontend and FastAPI backend, it leverages TF-IDF vectorization and cosine similarity to identify movie connections based on content and user preferences. The system features real-time plot-based search, genre filtering, user authentication with MongoDB persistence, and force-directed graph visualizations rendered on HTML5 Canvas. Users can explore movie recommendations through an immersive space-themed interface while tracking their personal watchlists and discovering new films through intelligent similarity matching.
+            </p>
+            <div class="flex gap-4">
+                <a href="https://github.com/girish-j04" target="_blank" class="px-4 py-2 bg-purple-600 rounded-lg hover:bg-purple-700 transition">GitHub</a>
+                <a href="https://github.com/girish-j04" target="_blank" class="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 transition">Live Demo</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Talk to Your Repo Modal with Carousel -->
+    <div id="modal-talktoyourrepo" class="modal-backdrop">
+        <div class="modal relative bg-[#1a2332] rounded-xl max-w-4xl mx-auto mt-20 p-6 md:p-8 border border-[#2a3441]">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl z-20">&times;</button>
+            <h2 class="text-2xl font-bold mb-4 gradient-text">Talk to Your Repo — AI Code Companion</h2>
+            
+            <div class="carousel-container">
+                <div class="carousel-wrapper overflow-hidden rounded-lg">
+                    <div class="carousel" id="carousel-talktoyourrepo">
+                        <img src="tt_hero.jpg" alt="Repo Hero">
+                        <img src="tt_chat.jpg" alt="Repo chat">
+                        <img src="tt_chat1.jpg" alt="Repo chat">
+                        <img src="tt_chat2.jpg" alt="Repo chat">
+                    </div>
+                </div>
+                <button class="carousel-nav prev" onclick="prevSlide('talktoyourrepo')">❮</button>
+                <button class="carousel-nav next" onclick="nextSlide('talktoyourrepo')">❯</button>
+                <div class="carousel-dots">
+                    <span class="carousel-dot active" onclick="goToSlide('talktoyourrepo', 0)"></span>
+                    <span class="carousel-dot" onclick="goToSlide('talktoyourrepo', 1)"></span>
+                    <span class="carousel-dot" onclick="goToSlide('talktoyourrepo', 2)"></span>
+                    <span class="carousel-dot" onclick="goToSlide('talktoyourrepo', 3)"></span>
+                </div>
+            </div>
+            
+            <p class="text-gray-300 mb-4">
+                Talk to your Repo is an AI-powered code assistant that enables natural language conversations with GitHub repositories using a modern full-stack architecture. Built with FastAPI (Python backend) and React (frontend), it leverages Google Gemini AI for advanced code embeddings and semantic understanding, automatically cloning and indexing repositories into searchable chunks. Users can ask questions about code functionality, structure, and implementation through an intuitive chat interface, receiving intelligent responses with precise source citations, file references, and real-time processing status updates. The system features vector similarity search for relevant code discovery, file tree visualization, conversation history, and intelligent filtering that processes only relevant code files while maintaining context across multiple queries.
+            </p>
+            <div class="flex gap-4">
+                <a href="https://github.com/girish-j04" target="_blank" class="px-4 py-2 bg-purple-600 rounded-lg hover:bg-purple-700 transition">GitHub</a>
+                <a href="https://github.com/girish-j04" target="_blank" class="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 transition">Live Demo</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wildfire Modal with PDF Preview -->
+    <div id="modal-wildfire" class="modal-backdrop">
+        <div class="modal relative bg-[#1a2332] rounded-xl max-w-4xl mx-auto mt-20 p-6 md:p-8 border border-[#2a3441]">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl z-20">&times;</button>
+            <h2 class="text-2xl font-bold mb-4 gradient-text">Wildfire Risk Prediction — Project Report</h2>
+            
+            <div class="pdf-preview-container" onclick="openPdf('https://drive.google.com/file/d/1MZWXrz7gpdylpdMTWgwdvJJ8n73HybBn/view?usp=sharing')">
+                <div class="pdf-preview-header">
+                    <svg class="pdf-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M4 18h12V6l-4-4H4v16zm1-15h6l3 3v11H5V3z"/>
+                        <path d="M7 10h2v1H7zm0 2h4v1H7zm0 2h4v1H7z"/>
+                    </svg>
+                    <span class="text-sm font-semibold">wildfire-report.pdf</span>
+                    <span class="text-xs text-gray-400 ml-auto">Click to open full PDF</span>
+                </div>
+                <div class="pdf-document-preview">
+                    <div class="pdf-document-mock">
+                        <div class="pdf-title">Wildfire Risk Prediction Using Machine Learning</div>
+                        <div class="pdf-content-lines">
+                            <div class="pdf-line title"></div>
+                            <div class="pdf-line subtitle"></div>
+                            <div class="pdf-line long"></div>
+                            <div class="pdf-line medium"></div>
+                            <div class="pdf-line long"></div>
+                            <div class="pdf-line short"></div>
+                            <div class="pdf-line long"></div>
+                            <div class="pdf-line medium"></div>
+                            <div class="pdf-line long"></div>
+                            <div class="pdf-line short"></div>
+                        </div>
+                    </div>
+                    <div class="pdf-preview-overlay">
+                        <div class="bg-black/80 text-white px-4 py-2 rounded-lg">
+                            <svg class="w-6 h-6 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                            <span class="text-sm">Open Full PDF</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="text-gray-300">
+                This project developed an integrated wildfire risk prediction system for Queensland, Australia using multi-source data from NASA FIRMS (satellite fire detection) and Open Meteo weather APIs covering 2021-2024. The team implemented and compared seven machine learning models including XGBoost, LSTM, Random Forest, and SVM using features like temperature, humidity, soil conditions, wind speed, and precipitation. LSTM achieved the best performance with 82% accuracy and 90% recall, while XGBoost delivered strong balanced metrics at 80% accuracy. The system is designed for real-time wildfire occurrence prediction and early warning applications.
+            </p>
+        </div>
+    </div>
+
+    <!-- VQA Modal with PDF Preview -->
+    <div id="modal-vqa" class="modal-backdrop">
+        <div class="modal relative bg-[#1a2332] rounded-xl max-w-4xl mx-auto mt-20 p-6 md:p-8 border border-[#2a3441]">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl z-20">&times;</button>
+            <h2 class="text-2xl font-bold mb-4 gradient-text">Visual Question Answering — Project Report</h2>
+            
+            <div class="pdf-preview-container" onclick="openPdf('https://drive.google.com/file/d/1HueT9c-6KTF7ZFJmtWjfZW7morKxDsXp/view?usp=sharing')">
+                <div class="pdf-preview-header">
+                    <svg class="pdf-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M4 18h12V6l-4-4H4v16zm1-15h6l3 3v11H5V3z"/>
+                        <path d="M7 10h2v1H7zm0 2h4v1H7zm0 2h4v1H7z"/>
+                    </svg>
+                    <span class="text-sm font-semibold">vqa-report.pdf</span>
+                    <span class="text-xs text-gray-400 ml-auto">Click to open full PDF</span>
+                </div>
+                <div class="pdf-document-preview">
+                    <div class="pdf-document-mock">
+                        <div class="pdf-title">Visual Question Answering with Deep Learning</div>
+                        <div class="pdf-content-lines">
+                            <div class="pdf-line title"></div>
+                            <div class="pdf-line subtitle"></div>
+                            <div class="pdf-line long"></div>
+                            <div class="pdf-line medium"></div>
+                            <div class="pdf-line long"></div>
+                            <div class="pdf-line short"></div>
+                            <div class="pdf-line long"></div>
+                            <div class="pdf-line medium"></div>
+                            <div class="pdf-line long"></div>
+                            <div class="pdf-line short"></div>
+                        </div>
+                    </div>
+                    <div class="pdf-preview-overlay">
+                        <div class="bg-black/80 text-white px-4 py-2 rounded-lg">
+                            <svg class="w-6 h-6 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                            <span class="text-sm">Open Full PDF</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="text-gray-300">
+                This project develops a Visual Question Answering system that combines Stacked Attention Networks with Multi-Layer Feature Fusion to improve image understanding. The system uses VGG-19 for image feature extraction and LSTM for question processing, but introduces a novel approach of fusing features from multiple CNN layers (rather than just the final layer) using addition and concatenation operators. The stacked attention mechanism helps reduce noise and focus on image regions relevant to the question, while multi-layer feature fusion preserves important information that would otherwise be lost in deeper layers. The approach achieves 63.72% accuracy on the VQA dataset, outperforming baseline methods including vanilla VQA (57.58%) and single attention mechanisms (59.8%).
+            </p>
+        </div>
+    </div>
+
+    <!-- M-Commerce Modal with PDF Preview -->
+    <div id="modal-mcommerce" class="modal-backdrop">
+        <div class="modal relative bg-[#1a2332] rounded-xl max-w-4xl mx-auto mt-20 p-6 md:p-8 border border-[#2a3441]">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl z-20">&times;</button>
+            <h2 class="text-2xl font-bold mb-4 gradient-text">M-Commerce Offline Payment — Project Report</h2>
+            
+            <div class="pdf-preview-container" onclick="openPdf('https://link.springer.com/article/10.1007/s42979-021-00978-x')">
+                <div class="pdf-preview-header">
+                    <svg class="pdf-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M4 18h12V6l-4-4H4v16zm1-15h6l3 3v11H5V3z"/>
+                        <path d="M7 10h2v1H7zm0 2h4v1H7zm0 2h4v1H7z"/>
+                    </svg>
+                    <span class="text-sm font-semibold">mcommerce-report.pdf</span>
+                    <span class="text-xs text-gray-400 ml-auto">Click to open full PDF</span>
+                </div>
+                <div class="pdf-document-preview">
+                    <div class="pdf-document-mock">
+                        <div class="pdf-title">M-Commerce Offline Payment Solution</div>
+                        <div class="pdf-content-lines">
+                            <div class="pdf-line title"></div>
+                            <div class="pdf-line subtitle"></div>
+                            <div class="pdf-line long"></div>
+                            <div class="pdf-line medium"></div>
+                            <div class="pdf-line long"></div>
+                            <div class="pdf-line short"></div>
+                            <div class="pdf-line long"></div>
+                            <div class="pdf-line medium"></div>
+                            <div class="pdf-line long"></div>
+                            <div class="pdf-line short"></div>
+                        </div>
+                    </div>
+                    <div class="pdf-preview-overlay">
+                        <div class="bg-black/80 text-white px-4 py-2 rounded-lg">
+                            <svg class="w-6 h-6 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                            <span class="text-sm">Open Full PDF</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="text-gray-300">
+                This project develops a mobile wallet payment application using React Native, Node.js, and MongoDB that enables secure transactions in both online and offline environments. The system uses AsyncStorage for offline transaction storage, WebSockets for secure online communication, and bcrypt for password encryption, addressing connectivity issues in areas with poor internet access. Key technical features include document-level database locking for concurrency control and automatic synchronization of offline transactions when connectivity returns. Performance testing showed 600ms average transaction times, outperforming existing wallet applications that typically require 700-800ms. Published in SN Computer Science (2022).
+            </p>
+        </div>
+    </div>
+
     <script>
-        // Smooth scrolling for navigation links
+        // Existing navigation and scroll functionality
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -608,7 +1155,6 @@
             });
         });
 
-        // Intersection Observer for scroll animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -622,12 +1168,10 @@
             });
         }, observerOptions);
 
-        // Observe all sections for animations
         document.querySelectorAll('.section-reveal').forEach(section => {
             observer.observe(section);
         });
 
-        // Active navigation link highlighting
         window.addEventListener('scroll', () => {
             const sections = document.querySelectorAll('section[id]');
             const navLinks = document.querySelectorAll('.nav-link');
@@ -649,12 +1193,89 @@
             });
         });
 
-        // Form submission
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your message! I\'ll get back to you soon.');
-            this.reset();
+        // Modal functionality
+        function openModal(id) {
+            document.getElementById(id).style.display = 'block';
+            document.body.classList.add('overflow-hidden');
+            // Reset carousel position if it's a carousel modal
+            if (id.includes('gradcompass') || id.includes('talktoyourrepo') || id.includes('cine')) {
+                const projectName = id.replace('modal-', '');
+                goToSlide(projectName, 0);
+            }
+        }
+
+        function closeModal() {
+            document.querySelectorAll('.modal-backdrop').forEach(m => m.style.display = 'none');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        function openPdf(url) {
+            window.open(url, '_blank');
+        }
+
+        // Carousel functionality
+        const carouselStates = {
+            gradcompass: { currentSlide: 0, totalSlides: 5 },
+            talktoyourrepo: { currentSlide: 0, totalSlides: 4 },
+            cine: { currentSlide: 0, totalSlides: 4 }
+        };
+
+        function updateCarousel(projectName) {
+            const carousel = document.getElementById(`carousel-${projectName}`);
+            const state = carouselStates[projectName];
+            const translateX = -state.currentSlide * 100;
+            
+            carousel.style.transform = `translateX(${translateX}%)`;
+            
+            // Update dots
+            const modal = document.getElementById(`modal-${projectName}`);
+            const dots = modal.querySelectorAll('.carousel-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === state.currentSlide);
+            });
+        }
+
+        function nextSlide(projectName) {
+            const state = carouselStates[projectName];
+            state.currentSlide = (state.currentSlide + 1) % state.totalSlides;
+            updateCarousel(projectName);
+        }
+
+        function prevSlide(projectName) {
+            const state = carouselStates[projectName];
+            state.currentSlide = state.currentSlide === 0 ? state.totalSlides - 1 : state.currentSlide - 1;
+            updateCarousel(projectName);
+        }
+
+        function goToSlide(projectName, slideIndex) {
+            const state = carouselStates[projectName];
+            state.currentSlide = slideIndex;
+            updateCarousel(projectName);
+        }
+
+        // Event listeners
+        document.addEventListener('keydown', e => { 
+            if (e.key === 'Escape') closeModal(); 
         });
+
+        document.querySelectorAll('.modal-backdrop').forEach(b => {
+            b.addEventListener('click', e => { 
+                if (e.target === b) closeModal(); 
+            });
+        });
+
+        // Auto-advance carousel (optional)
+        function autoAdvanceCarousel() {
+            Object.keys(carouselStates).forEach(projectName => {
+                const modal = document.getElementById(`modal-${projectName}`);
+                if (modal && modal.style.display === 'block') {
+                    nextSlide(projectName);
+                }
+            });
+        }
+
+        
     </script>
+
 </body>
 </html>
