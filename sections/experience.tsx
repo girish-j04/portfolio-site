@@ -1,6 +1,20 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { ExternalLink } from "lucide-react";
 
 const experiences = [
+  {
+    title: "Software Engineer",
+    company: "Credible Data",
+    location: "Boulder, CO",
+    period: "September 2025 - April 2026",
+    url: "https://atlas-frontend-dev-xqvglqziya-uc.a.run.app/",
+    highlights: [
+      "Built data platform in React/TypeScript/Node.js with 7 chart types and Malloy semantic query support",
+      "Integrated Claude Agent SDK for autonomous AI data discovery with real-time streaming",
+      "Designed multi-database architecture across PostgreSQL, Neo4j, and BigQuery",
+      "Deployed containerized pnpm monorepo to GCP Cloud Run via GitHub Actions CI/CD",
+    ],
+  },
   {
     title: "AI Research Intern",
     company: "Leeds School of Business, CU Boulder",
@@ -11,18 +25,6 @@ const experiences = [
       "Integrated Gemini and Llama with live model switching via Kubernetes, achieving 2-3s response times",
       "Engineered RAG pipeline with context-aware memory, processing 20+ academic documents per session",
       "Cut student research onboarding time 40% through AI-assisted document summarization",
-    ],
-  },
-  {
-    title: "Software Engineer",
-    company: "Credible Data",
-    location: "Boulder, CO",
-    period: "Jan 2025 - Present",
-    highlights: [
-      "Built data platform in React/TypeScript/Node.js with 7 chart types and Malloy semantic query support",
-      "Integrated Claude Agent SDK for autonomous AI data discovery with real-time streaming",
-      "Designed multi-database architecture across PostgreSQL, Neo4j, and BigQuery",
-      "Deployed containerized pnpm monorepo to GCP Cloud Run via GitHub Actions CI/CD",
     ],
   },
   {
@@ -51,9 +53,34 @@ export function Experience() {
               <CardHeader>
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
                   <div>
-                    <CardTitle>{exp.title}</CardTitle>
+                    <CardTitle className="flex items-center gap-2">
+                      {exp.title}
+                      {exp.url && (
+                        <a
+                          href={exp.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-muted hover:text-foreground transition-colors"
+                          aria-label={`Visit ${exp.company}`}
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
+                      )}
+                    </CardTitle>
                     <CardDescription className="mt-1">
-                      {exp.company} • {exp.location}
+                      {exp.url ? (
+                        <a
+                          href={exp.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:underline underline-offset-2"
+                        >
+                          {exp.company}
+                        </a>
+                      ) : (
+                        exp.company
+                      )}{" "}
+                      • {exp.location}
                     </CardDescription>
                   </div>
                   <span className="text-sm text-muted font-medium">{exp.period}</span>

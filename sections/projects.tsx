@@ -6,6 +6,7 @@ const projects = [
   {
     title: "MLOps Platform",
     description: "End-to-end model training and deployment infrastructure",
+    url: "https://github.com/girish-j04/MLOps-pipeline",
     technologies: ["MLflow", "DVC", "FastAPI", "Docker", "GitHub Actions", "Prometheus", "Grafana"],
     highlights: [
       "Cut model deployment time from days to 15 minutes via automated CI/CD",
@@ -36,6 +37,7 @@ const projects = [
   {
     title: "Cine-Stellation",
     description: "Interactive movie recommendation engine with visual discovery",
+    url: "https://github.com/girish-j04/cine-stellation",
     technologies: ["Next.js", "FastAPI", "TF-IDF", "MongoDB", "HTML5 Canvas"],
     highlights: [
       "Built TF-IDF recommendation engine across 9,600+ films at 90% accuracy and <1s query response",
@@ -56,8 +58,19 @@ export function Projects() {
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <CardTitle className="flex items-center gap-2 group-hover:text-stone-600 transition-colors">
-                      {project.title}
-                      <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      {project.url ? (
+                        <a
+                          href={project.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:underline underline-offset-2 flex items-center gap-2"
+                        >
+                          {project.title}
+                          <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </a>
+                      ) : (
+                        project.title
+                      )}
                     </CardTitle>
                     <CardDescription className="mt-1">{project.description}</CardDescription>
                   </div>
